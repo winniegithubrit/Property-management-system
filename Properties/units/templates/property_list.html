@@ -1,0 +1,31 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    <h1 class="text-center mb-4">PROPERTY LIST</h1>
+
+    <div class="row">
+        {% for property in properties %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        {% if property.mage %}
+                            <img src="{{ property.mage.url }}" class="card-img-top" alt="{{ property.title }}"/>
+                        {% else %}
+                            <img src="/home/winniejomo/Downloads/saru-robert-9rP3mxf8qWI-unsplash.jpg" class="card-img-top" alt="Default Image"/>
+                        {% endif %}
+                        <h5 class="card-title">{{ property.title}}</h5>
+                        <p class="card-text"><strong>Description:</strong> {{ property.description }}</p>
+                        <p class="card-text"><strong>Price:</strong> ${{ property.price }}</p>
+                        <p class="card-text"><strong>Location:</strong> {{ property.location }}</p>
+                        <p class="card-text"><strong>Bedrooms:</strong> {{ property.bedrooms }}</p>
+                        <p class="card-text"><strong>Bathrooms:</strong> {{ property.bathrooms }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'update_existing_property' property.pk %}" class="btn btn-custom">Update</a>
+                        <a href="{% url 'delete_property' property.pk %}" class="btn btn-custom" onclick="return confirm('Are you sure you want to delete this property?');">Delete</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{%extends 'home.html'%}
+{% block content%}
+<h1>Delete Property</h1>
+<form method="post" action="{% url 'delete_property' pk=property.pk %}">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
+<a href="{% url 'property_list' %}">Cancel</a>
+{% endblock%}
